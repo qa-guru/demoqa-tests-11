@@ -27,7 +27,7 @@ public class RegistrationFormWithPageObjectsTests {
                 .setFirstName(firstName)
                 .setLastName("Egorov");
         $("#userEmail").setValue("alex@egorov.com");
-        $("#genderWrapper").$(byText("Other")).click();
+        $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("1231231230");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("July");
@@ -46,7 +46,7 @@ public class RegistrationFormWithPageObjectsTests {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         registrationPage
                 .checkForm("Student Name", firstName + " Egorov")
-                .checkForm("Student Email", "alex@egorov.com")
+                .checkForm("Student Email", "alex1@egorov.com")
                 .checkForm("Gender", "Other");
     }
 }
