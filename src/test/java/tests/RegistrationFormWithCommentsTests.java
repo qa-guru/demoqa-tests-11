@@ -47,6 +47,7 @@ public class RegistrationFormWithCommentsTests {
         $("#currentAddress").setValue("Some street 1");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
+//        $("#react-select-3-option-0").click();
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
