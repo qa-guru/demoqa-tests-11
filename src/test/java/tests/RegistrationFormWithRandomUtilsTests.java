@@ -6,16 +6,20 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static utils.RandomUtils.getRandomString;
 
-public class RegistrationFormWithTestBaseTests extends TestBase {
+public class RegistrationFormWithRandomUtilsTests extends TestBase {
+
+    String firstName = getRandomString(10),
+            lastName = getRandomString(10);
 
     @Test
     void successFillTest() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Egorov");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
         $("#userEmail").setValue("alex@egorov.com");
         $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("1231231230");
@@ -35,6 +39,6 @@ public class RegistrationFormWithTestBaseTests extends TestBase {
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name"))
-                .parent().shouldHave(text("Alex Egorov"));
+                .parent().shouldHave(text(firstName + " " + lastName));
     }
 }
