@@ -30,7 +30,8 @@ public class PracticeFormTest {
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Solo");
         $("#userEmail").setValue("solo@awg.ru");
-        $(byText("Male")).click(); // я здесь пытался использовать selectRadio(String value), но не получилось. Ещё я не понял какое значение надо ставить
+        $("[for='gender-radio-1']").click(); // я здесь пытался использовать selectRadio(String value), но не получилось. Ещё я не понял какое значение надо ставить
+       // $(byText("Male")).click(); либо через текст
         $("#userNumber").setValue("9999999999");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOptionByValue("2000");
