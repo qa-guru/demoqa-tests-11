@@ -3,8 +3,9 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
-import java.io.File;
+//import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -27,10 +28,10 @@ public class PracticeFormTest {
         open("/automation-practice-form");
         $(".main-header").shouldHave(text("Practice Form"));
 
-        $("#firstName").setValue("Alex");
+        new RegistrationPage().setFirstName("Alex");
         $("#lastName").setValue("Solo");
         $("#userEmail").setValue("solo@awg.ru");
-        $("[for='gender-radio-1']").click(); // я здесь пытался использовать selectRadio(String value), но не получилось. Ещё я не понял какое значение надо ставить
+        $(".custom-radio [for='gender-radio-1']").click(); // я здесь пытался использовать selectRadio(String value), но не получилось. Ещё я не понял какое значение надо ставить
        // $(byText("Male")).click(); либо через текст
         $("#userNumber").setValue("9999999999");
         $("#dateOfBirthInput").click();
@@ -40,8 +41,8 @@ public class PracticeFormTest {
         $("#subjectsInput").setValue("Computer Science").pressEnter();
         $(byText("Reading")).click();
         $(byText("Music")).click();
-        File testFile = new File("src/test/resources/testFile.jpg");
-        $("#uploadPicture").uploadFile(testFile);
+        //FiletestFile = new File("src/test/resources/img/testFile.jpg");
+        $("#uploadPicture").uploadFromClasspath("img/testFile.jpg");
         $("#currentAddress").setValue("City Street House");
         $("#state").scrollTo().click();
         $("#react-select-3-option-2").click(); //либо через текст $(byText("Haryana")).click(); но я хотел уйти от выбора по тексту
@@ -49,7 +50,7 @@ public class PracticeFormTest {
         $("#react-select-4-option-0").click();
         $("#submit").scrollTo().click();
         $(".table-responsive").shouldHave(text("Alex"), text("Solo"),
-                text("solo@awg.ru"), text("9999999999"), text("06 October,2000"), text("testFile.jpg"),
+                text("solo@awg.ru"), text("9999999999"), text("06 October,2000"), text("img/testFile.jpg"),
                 text("City Street House"), text("Haryana Karnal"));
     }
 }
