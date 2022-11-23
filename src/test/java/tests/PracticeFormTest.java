@@ -17,8 +17,9 @@ public class PracticeFormTest {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        // Configuration.browserSize = "1920x1080"; у меня открывалось окно посередине двух экранов мне это надоело
-        // поэтому я просто скроллил до нужного элемента .scrollTo()
+        Configuration.browserSize = "1920x1080";
+        // я просто скроллил до нужного элемента .scrollTo(), но сайт кривой и на мелком экране внизу баннер закрывает кнопку submit
+        // поэтому scrollTo есть в коде
     }
 
     @Test
@@ -29,7 +30,7 @@ public class PracticeFormTest {
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Solo");
         $("#userEmail").setValue("solo@awg.ru");
-        $(byText("Male")).click();
+        $(byText("Male")).click(); // я здесь пытался использовать selectRadio(String value), но не получилось. Ещё я не понял какое значение надо ставить
         $("#userNumber").setValue("9999999999");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOptionByValue("2000");
@@ -40,30 +41,14 @@ public class PracticeFormTest {
         $(byText("Music")).click();
         File testFile = new File("src/test/resources/testFile.jpg");
         $("#uploadPicture").uploadFile(testFile);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
+        $("#currentAddress").setValue("City Street House");
+        $("#state").scrollTo().click();
+        $("#react-select-3-option-2").click(); //либо через текст $(byText("Haryana")).click(); но я хотел уйти от выбора по тексту
+        $("#city").click();
+        $("#react-select-4-option-0").click();
         $("#submit").scrollTo().click();
-
-        $("#output").shouldHave(text("Alex"), text("alex@company.com"),
-                text("Some address 1"), text("Other address 2")); */
+        $(".table-responsive").shouldHave(text("Alex"), text("Solo"),
+                text("solo@awg.ru"), text("9999999999"), text("06 October,2000"), text("testFile.jpg"),
+                text("City Street House"), text("Haryana Karnal"));
     }
 }
